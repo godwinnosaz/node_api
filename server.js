@@ -18,7 +18,7 @@ const server = createServer((req, res) => {
   } else if (req.url === '/api/getBalance' && req.method === 'GET') {
     
     getBalance(req, res);
-  }else if (req.url === '/api/getUserBalance' && req.method === 'GET') {
+  }else if (req.url === '/api/getUserBalance' && req.method === 'POST') {
     
     getUserBalance(req, res);
   }else if (req.url === '/api/withdrawFromTreasury' && req.method === 'GET') {
