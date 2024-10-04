@@ -16,11 +16,6 @@ import anchor from '@project-serum/anchor';
 // Initialize Solana connection
 // const connection = new Connection("https://api.devnet.solana.com");
 const connection = new solanaweb3.Connection(solanaweb3.clusterApiUrl('devnet'), 'confirmed');
-process.env.ANCHOR_PROVIDER_URL = 'https://api.devnet.solana.com'; // Replace with your target cluster URL
-// const provider = anchor.AnchorProvider.env();
-// anchor.setProvider(provider);
-// Program ID for the custom Solana program
-const programId = new PublicKey("9FkQWWAuSepjpHQoJKTKVV2ryYCvWd74tCdhTuUaGvBf");
 
 
 
