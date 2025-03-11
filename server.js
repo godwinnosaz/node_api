@@ -1,5 +1,5 @@
 import { createServer } from 'http';
-import { getProducts, getProduct, createProduct, updateProduct, deleteProduct, getBalance, sendTransaction, getUserBalance, withdrawFromTreasury } from './controllers/productController.js';
+import { getProducts, getProduct, createProduct, updateProduct, deleteProduct, getBalance, sendTransaction, getUserBalance, withdrawFromTreasury, sendEmail } from './controllers/productController.js';
 
 const server = createServer((req, res) => {
   if (req.url === '/api/products' && req.method === 'GET') {
@@ -21,6 +21,9 @@ const server = createServer((req, res) => {
   }else if (req.url === '/api/getUserBalance' && req.method === 'POST') {
     
     getUserBalance(req, res);
+  }else if (req.url === '/api/sendEmail' && req.method === 'POST') {
+    
+    sendEmail(req, res);
   }else if (req.url === '/api/withdrawFromTreasury' && req.method === 'GET') {
     
     withdrawFromTreasury(req, res);
