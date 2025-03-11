@@ -176,7 +176,7 @@ export async function sendEmail(req, res) {
         // Configure SMTP Transporter
         let transporter = nodemailer.createTransport({
             host: 'mail.vplaza.com.ng', // Your SMTP server
-            port: 465, // Use 465 for SSL or 587 for TLS
+            port: 587, // Use 465 for SSL or 587 for TLS
             secure: true, // true for 465, false for 587
             auth: {
                 user: 'mail@vplaza.com.ng', // Your email
