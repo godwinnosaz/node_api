@@ -8,7 +8,7 @@ import BN from "bn.js";
 import { findAll, findById, create, update, remove } from '../models/productModel.js';
 // import idl from '../data/idl.json' assert { type: 'json' };
 import { getPostData } from '../utils.js';
-
+import nodemailer from 'nodemailer';
 import anchor from '@project-serum/anchor';
 
 // Set up the provider
@@ -164,6 +164,45 @@ export async function getBalance(req, res)  {
 // Your connection to the Solana cluster (e.g., Devnet)
 
 
+export async function sendEmail(req, res) {
+    try {
+        const body = await getPostData(req);
+        const { email } = JSON.parse(body);
+
+        if (!email) {
+            throw new Error("Missing or invalid email.");
+        }
+
+        // Configure SMTP Transporter
+        let transporter = nodemailer.createTransport({
+            host: 'mail.vplaza.com.ng', // Your SMTP server
+            port: 465, // Use 465 for SSL or 587 for TLS
+            secure: true, // true for 465, false for 587
+            auth: {
+                user: 'mail@vplaza.com.ng', // Your email
+                pass: 'Passw0rd4###P' // Your password (consider using environment variables)
+            }
+        });
+
+        // Email Options
+        let mailOptions = {
+            from: '"VPLAZA" <mail@vplaza.com.ng>', // Sender
+            to: email, // Recipient email
+            subject: "Test Email from Node.js", // Subject
+            html: "<h1>Hello!</h1><p>This is a test email from your Node.js application.</p>" // Email Body
+        };
+
+        // Send Email
+        let info = await transporter.sendMail(mailOptions);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: "Email sent successfully!", info }));
+    } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: error.message }));
+    }
+}
+
 export async function getUserBalance(req, res) {
     try {
         
@@ -317,6 +356,6 @@ export default {
     updateProduct,
     deleteProduct,
     getBalance,
-
+    sendEmail,
     sendTransaction
 }
